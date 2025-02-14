@@ -4,7 +4,7 @@ group: Foundations
 description: Our grid system for creating consistent layouts across applications.
 ---
 
-import { Tabs, TabItem } from '@components/mdx'
+import { Tabs, TabItem } from '@components/mdx';
 
 Our grid system provides a flexible foundation for creating consistent layouts across different screen sizes. It uses CSS Grid and is built to be responsive and adaptable.
 
@@ -36,8 +36,8 @@ We use a 12-column grid system that can be subdivided as needed:
 
 ```jsx
 <div class="grid grid-cols-12 gap-4">
-  <div class="col-span-12 md:col-span-6">Content</div>
-  <div class="col-span-12 md:col-span-6">Content</div>
+	<div class="col-span-12 md:col-span-6">Content</div>
+	<div class="col-span-12 md:col-span-6">Content</div>
 </div>
 ```
 
@@ -77,19 +77,19 @@ We use a 12-column grid system that can be subdivided as needed:
 
 ```jsx
 <div class="grid grid-cols-12 gap-4">
-  {/* Full width on mobile, half width on tablet and up */}
-  <div class="col-span-12 md:col-span-6">
-    <div class="card">Content</div>
-  </div>
+	{/* Full width on mobile, half width on tablet and up */}
+	<div class="col-span-12 md:col-span-6">
+		<div class="card">Content</div>
+	</div>
 
-  {/* Full width on mobile, quarter width on tablet and up */}
-  <div class="col-span-12 md:col-span-3">
-    <div class="card">Sidebar</div>
-  </div>
+	{/* Full width on mobile, quarter width on tablet and up */}
+	<div class="col-span-12 md:col-span-3">
+		<div class="card">Sidebar</div>
+	</div>
 
-  {/* Full width on mobile, quarter width on tablet and up */}
-  <div class="col-span-12 md:col-span-3">
-    <div class="card">Sidebar</div>
-  </div>
+	{/* Full width on mobile, quarter width on tablet and up */}
+	<div class="col-span-12 md:col-span-3">
+		<div class="card">Sidebar</div>
+	</div>
 </div>
 ```

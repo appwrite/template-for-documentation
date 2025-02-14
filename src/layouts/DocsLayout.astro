@@ -115,13 +115,13 @@ const navigation = [
       document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('dark')
     </script>
   </head>
-  <body class="min-h-screen bg-[#FAFAFB] dark:bg-gray-900">
+  <body class="min-h-screen bg-[#FAFAFB] dark:bg-[#121212]">
     <Header client:load />
     <SidebarOverlay client:load />
 
     <div class="flex h-[calc(100vh-3.5rem)] mt-14">
       <!-- Left Sidebar -->
-      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800 lg:translate-x-0 transform -translate-x-full transition-transform duration-200 ease-in-out" id="left-sidebar">
+      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-[#EDEDF0] bg-white dark:bg-[#121212] dark:border-neutral-800 lg:translate-x-0 transform -translate-x-full transition-transform duration-200 ease-in-out" id="left-sidebar">
         <Sidebar navigation={navigation} client:load />
       </aside>
 
@@ -133,7 +133,7 @@ const navigation = [
       </div>
 
       <!-- Right Sidebar -->
-      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-[#EDEDF0] bg-[#FAFAFB] dark:bg-gray-900 dark:border-gray-800 lg:translate-x-0 transform translate-x-full transition-transform duration-200 ease-in-out" id="right-sidebar">
+      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-[#EDEDF0] bg-[#FAFAFB] dark:bg-[#121212] dark:border-neutral-800 lg:translate-x-0 transform translate-x-full transition-transform duration-200 ease-in-out" id="right-sidebar">
         <TableOfContents client:load />
       </aside>
     </div>

@@ -75,18 +75,18 @@ The sidebar navigation is automatically generated from your content structure. T
 
 ```typescript
 // Define groups in desired order
-const groups = ['Overview', 'Foundations', 'Components'] as const
+const groups = ['Overview', 'Foundations', 'Components'] as const;
 
 const docs = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    group: z.enum(groups).optional(), // Groups will appear in the order defined above
-    order: z.number().optional(),
-    priority: z.number().optional(),
-  }),
-})
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		group: z.enum(groups).optional(), // Groups will appear in the order defined above
+		order: z.number().optional(),
+		priority: z.number().optional()
+	})
+});
 ```
 
 Each MDX file can include these frontmatter fields:
@@ -144,13 +144,13 @@ Customize colors, typography, and other design tokens in `tailwind.config.mjs`:
 
 ```js
 theme: {
-  extend: {
-    colors: {
-      primary: {
-        // Your color palette
-      }
-    }
-  }
+	extend: {
+		colors: {
+			primary: {
+				// Your color palette
+			}
+		}
+	}
 }
 ```
 

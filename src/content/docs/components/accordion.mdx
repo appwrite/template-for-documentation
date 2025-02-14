@@ -4,7 +4,7 @@ group: Components
 description: A vertically stacked set of interactive headings that each reveal a section of content.
 ---
 
-import { Tabs, TabItem } from '@components/mdx'
+import { Tabs, TabItem } from '@components/mdx';
 
 The Accordion component is used to organize and hide content behind expandable sections, helping to reduce visual clutter while keeping information accessible.
 
@@ -12,12 +12,10 @@ The Accordion component is used to organize and hide content behind expandable s
 
 ```jsx
 <Accordion>
-  <AccordionItem>
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It adheres to the WAI-ARIA design pattern.
-    </AccordionContent>
-  </AccordionItem>
+	<AccordionItem>
+		<AccordionTrigger>Is it accessible?</AccordionTrigger>
+		<AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+	</AccordionItem>
 </Accordion>
 ```
 
@@ -43,18 +41,18 @@ The Accordion component is used to organize and hide content behind expandable s
 
 ```css
 .accordion {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-default);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-default);
 }
 
 .accordion-trigger {
-  padding: var(--spacing-3);
-  font-weight: var(--font-weight-medium);
+	padding: var(--spacing-3);
+	font-weight: var(--font-weight-medium);
 }
 
 .accordion-content {
-  padding: var(--spacing-3);
-  border-top: 1px solid var(--border-default);
+	padding: var(--spacing-3);
+	border-top: 1px solid var(--border-default);
 }
 ```
 
@@ -89,14 +87,14 @@ The Accordion component is used to organize and hide content behind expandable s
 
 ```jsx
 <Accordion type="single" defaultValue="item-1">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Section 1</AccordionTrigger>
-    <AccordionContent>Content for section 1</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Section 2</AccordionTrigger>
-    <AccordionContent>Content for section 2</AccordionContent>
-  </AccordionItem>
+	<AccordionItem value="item-1">
+		<AccordionTrigger>Section 1</AccordionTrigger>
+		<AccordionContent>Content for section 1</AccordionContent>
+	</AccordionItem>
+	<AccordionItem value="item-2">
+		<AccordionTrigger>Section 2</AccordionTrigger>
+		<AccordionContent>Content for section 2</AccordionContent>
+	</AccordionItem>
 </Accordion>
 ```
 
@@ -104,13 +102,13 @@ The Accordion component is used to organize and hide content behind expandable s
 
 ```jsx
 <Accordion type="multiple">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Section 1</AccordionTrigger>
-    <AccordionContent>Content for section 1</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Section 2</AccordionTrigger>
-    <AccordionContent>Content for section 2</AccordionContent>
-  </AccordionItem>
+	<AccordionItem value="item-1">
+		<AccordionTrigger>Section 1</AccordionTrigger>
+		<AccordionContent>Content for section 1</AccordionContent>
+	</AccordionItem>
+	<AccordionItem value="item-2">
+		<AccordionTrigger>Section 2</AccordionTrigger>
+		<AccordionContent>Content for section 2</AccordionContent>
+	</AccordionItem>
 </Accordion>
 ```

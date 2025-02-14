@@ -4,7 +4,7 @@ group: Components
 description: A vertical list of interactive actions or options.
 ---
 
-import { Tabs, TabItem } from '@components/mdx'
+import { Tabs, TabItem } from '@components/mdx';
 
 The Action List component displays a vertical list of interactive items that trigger actions when selected. It's commonly used in menus, dropdowns, and navigation.
 
@@ -12,14 +12,14 @@ The Action List component displays a vertical list of interactive items that tri
 
 ```jsx
 <ActionList>
-  <ActionListItem onClick={() => console.log('Edit')}>
-    <EditIcon />
-    Edit
-  </ActionListItem>
-  <ActionListItem onClick={() => console.log('Delete')}>
-    <DeleteIcon />
-    Delete
-  </ActionListItem>
+	<ActionListItem onClick={() => console.log('Edit')}>
+		<EditIcon />
+		Edit
+	</ActionListItem>
+	<ActionListItem onClick={() => console.log('Delete')}>
+		<DeleteIcon />
+		Delete
+	</ActionListItem>
 </ActionList>
 ```
 
@@ -45,24 +45,24 @@ The Action List component displays a vertical list of interactive items that tri
 
 ```css
 .action-list {
-  border-radius: var(--radius-md);
-  background: var(--background-default);
+	border-radius: var(--radius-md);
+	background: var(--background-default);
 }
 
 .action-list-item {
-  padding: var(--spacing-3);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  cursor: pointer;
+	padding: var(--spacing-3);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	cursor: pointer;
 }
 
 .action-list-item:hover {
-  background: var(--background-hover);
+	background: var(--background-hover);
 }
 
 .action-list-item[data-selected='true'] {
-  background: var(--background-selected);
+	background: var(--background-selected);
 }
 ```
 
@@ -98,15 +98,15 @@ The Action List component displays a vertical list of interactive items that tri
 
 ```jsx
 <ActionList>
-  <ActionListItem icon={<EditIcon />} onClick={() => {}}>
-    Edit file
-  </ActionListItem>
-  <ActionListItem icon={<ShareIcon />} onClick={() => {}}>
-    Share file
-  </ActionListItem>
-  <ActionListItem icon={<DeleteIcon />} onClick={() => {}}>
-    Delete file
-  </ActionListItem>
+	<ActionListItem icon={<EditIcon />} onClick={() => {}}>
+		Edit file
+	</ActionListItem>
+	<ActionListItem icon={<ShareIcon />} onClick={() => {}}>
+		Share file
+	</ActionListItem>
+	<ActionListItem icon={<DeleteIcon />} onClick={() => {}}>
+		Delete file
+	</ActionListItem>
 </ActionList>
 ```
 
@@ -114,12 +114,12 @@ The Action List component displays a vertical list of interactive items that tri
 
 ```jsx
 <ActionList>
-  <ActionListItem selected onClick={() => {}}>
-    Option 1
-  </ActionListItem>
-  <ActionListItem onClick={() => {}}>Option 2</ActionListItem>
-  <ActionListItem disabled onClick={() => {}}>
-    Option 3 (Disabled)
-  </ActionListItem>
+	<ActionListItem selected onClick={() => {}}>
+		Option 1
+	</ActionListItem>
+	<ActionListItem onClick={() => {}}>Option 2</ActionListItem>
+	<ActionListItem disabled onClick={() => {}}>
+		Option 3 (Disabled)
+	</ActionListItem>
 </ActionList>
 ```

@@ -4,7 +4,7 @@ group: Components
 description: A small visual indicator used to highlight status, categories, or counts.
 ---
 
-import { Tabs, TabItem } from '@components/mdx'
+import { Tabs, TabItem } from '@components/mdx';
 
 The Badge component is used to highlight and display short pieces of information like status, counts, or categories. It's designed to be compact and visually distinct.
 
@@ -28,66 +28,66 @@ The Badge component is used to highlight and display short pieces of information
 
 ```css
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  padding: 0 var(--spacing-2);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
-  white-space: nowrap;
-  border-radius: var(--radius-sm);
-  border: 1px solid transparent;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	padding: 0 var(--spacing-2);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-tight);
+	white-space: nowrap;
+	border-radius: var(--radius-sm);
+	border: 1px solid transparent;
 }
 
 .badge[data-rounded='true'] {
-  border-radius: var(--radius-full);
+	border-radius: var(--radius-full);
 }
 
 /* Size Variants */
 .badge[data-size='sm'] {
-  height: 18px;
-  font-size: var(--font-size-xs);
+	height: 18px;
+	font-size: var(--font-size-xs);
 }
 
 .badge[data-size='md'] {
-  height: 22px;
+	height: 22px;
 }
 
 .badge[data-size='lg'] {
-  height: 26px;
-  padding: 0 var(--spacing-3);
+	height: 26px;
+	padding: 0 var(--spacing-3);
 }
 
 /* Color Variants */
 .badge[data-variant='primary'] {
-  background: var(--primary-background);
-  color: var(--primary-foreground);
-  border-color: var(--primary-border);
+	background: var(--primary-background);
+	color: var(--primary-foreground);
+	border-color: var(--primary-border);
 }
 
 .badge[data-variant='secondary'] {
-  background: var(--secondary-background);
-  color: var(--secondary-foreground);
-  border-color: var(--secondary-border);
+	background: var(--secondary-background);
+	color: var(--secondary-foreground);
+	border-color: var(--secondary-border);
 }
 
 .badge[data-variant='success'] {
-  background: var(--success-background);
-  color: var(--success-foreground);
-  border-color: var(--success-border);
+	background: var(--success-background);
+	color: var(--success-foreground);
+	border-color: var(--success-border);
 }
 
 .badge[data-variant='warning'] {
-  background: var(--warning-background);
-  color: var(--warning-foreground);
-  border-color: var(--warning-border);
+	background: var(--warning-background);
+	color: var(--warning-foreground);
+	border-color: var(--warning-border);
 }
 
 .badge[data-variant='error'] {
-  background: var(--error-background);
-  color: var(--error-foreground);
-  border-color: var(--error-border);
+	background: var(--error-background);
+	color: var(--error-foreground);
+	border-color: var(--error-border);
 }
 ```
 
@@ -126,11 +126,11 @@ The Badge component is used to highlight and display short pieces of information
 
 ```jsx
 <div className="flex gap-2">
-  <Badge variant="primary">Primary</Badge>
-  <Badge variant="secondary">Secondary</Badge>
-  <Badge variant="success">Success</Badge>
-  <Badge variant="warning">Warning</Badge>
-  <Badge variant="error">Error</Badge>
+	<Badge variant="primary">Primary</Badge>
+	<Badge variant="secondary">Secondary</Badge>
+	<Badge variant="success">Success</Badge>
+	<Badge variant="warning">Warning</Badge>
+	<Badge variant="error">Error</Badge>
 </div>
 ```
 
@@ -138,25 +138,25 @@ The Badge component is used to highlight and display short pieces of information
 
 ```jsx
 <div className="flex gap-2">
-  <Badge variant="primary" icon={<StarIcon />}>
-    Featured
-  </Badge>
-  <Badge variant="success" icon={<CheckIcon />}>
-    Completed
-  </Badge>
-  <Badge variant="warning" icon={<AlertIcon />}>
-    Pending
-  </Badge>
+	<Badge variant="primary" icon={<StarIcon />}>
+		Featured
+	</Badge>
+	<Badge variant="success" icon={<CheckIcon />}>
+		Completed
+	</Badge>
+	<Badge variant="warning" icon={<AlertIcon />}>
+		Pending
+	</Badge>
 </div>
 ```
 
 ### Sizes
 
 ```jsx
-<div className="flex gap-2 items-center">
-  <Badge size="sm">Small</Badge>
-  <Badge size="md">Medium</Badge>
-  <Badge size="lg">Large</Badge>
+<div className="flex items-center gap-2">
+	<Badge size="sm">Small</Badge>
+	<Badge size="md">Medium</Badge>
+	<Badge size="lg">Large</Badge>
 </div>
 ```
 
@@ -164,25 +164,21 @@ The Badge component is used to highlight and display short pieces of information
 
 ```jsx
 <div className="flex gap-2">
-  <Badge rounded>Default</Badge>
-  <Badge rounded variant="primary">
-    Primary
-  </Badge>
-  <Badge rounded variant="success">
-    Success
-  </Badge>
+	<Badge rounded>Default</Badge>
+	<Badge rounded variant="primary">
+		Primary
+	</Badge>
+	<Badge rounded variant="success">
+		Success
+	</Badge>
 </div>
 ```
 
 ### Interactive
 
 ```jsx
-<Badge
-  variant="primary"
-  onClick={() => console.log('Badge clicked')}
-  style={{ cursor: 'pointer' }}
->
-  Click me
+<Badge variant="primary" onClick={() => console.log('Badge clicked')} style={{ cursor: 'pointer' }}>
+	Click me
 </Badge>
 ```
 
@@ -190,7 +186,7 @@ The Badge component is used to highlight and display short pieces of information
 
 ```jsx
 <Badge variant="secondary">
-  Messages
-  <span className="badge-counter">5</span>
+	Messages
+	<span className="badge-counter">5</span>
 </Badge>
 ```

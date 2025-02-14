@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content'
 import * as MDXComponents from '@components/mdx'
 import MobileBreadcrumb from '@components/MobileBreadcrumb.svelte'
 import DesktopBreadcrumb from '@components/DesktopBreadcrumb.svelte'
+import GettingStartedSection from '@components/GettingStartedSection.svelte'
 
 interface Props {
   entry: CollectionEntry<'docs'>
@@ -25,6 +26,9 @@ const { Content } = await entry.render()
       group={entry.data.group}
       title={entry.data.title}
     />
+
+    <GettingStartedSection client:load />
+
     <h1 class="mt-0 mb-6">{entry.data.title}</h1>
     <Content components={MDXComponents} />
   </div>

@@ -4,22 +4,22 @@
 
 /* Theme Variables */
 :root {
-  --color-text-primary: #2d2d31;
-  --color-text-secondary: #56565c;
-  --prism-background: theme('colors.white');
-  --prism-color: theme('colors.gray.800');
+	--color-text-primary: #2d2d31;
+	--color-text-secondary: #56565c;
+	--prism-background: theme('colors.white');
+	--prism-color: theme('colors.neutral.800');
 }
 
 :root.dark {
-  --color-text-primary: theme('colors.white');
-  --color-text-secondary: theme('colors.gray.300');
-  --prism-background: theme('colors.gray.800');
-  --prism-color: theme('colors.gray.200');
+	--color-text-primary: theme('colors.white');
+	--color-text-secondary: theme('colors.neutral.300');
+	--prism-background: theme('colors.neutral.800');
+	--prism-color: theme('colors.neutral.200');
 }
 
 /* Prose Styles */
 .prose {
-  @apply text-[color:var(--color-text-secondary)];
+	@apply text-[color:var(--color-text-secondary)];
 }
 
 .prose h1,
@@ -28,191 +28,190 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-  @apply text-[color:var(--color-text-primary)] font-medium scroll-mt-20;
+	@apply scroll-mt-20 font-medium text-[color:var(--color-text-primary)];
 }
 
 .prose {
-  h1 {
-    @apply text-4xl mb-8;
-  }
-  h2 {
-    @apply text-2xl mt-12 mb-6;
-  }
-  h3 {
-    @apply text-xl mt-8 mb-4;
-  }
-  p {
-    @apply mb-6 leading-7;
-  }
+	h1 {
+		@apply mb-8 text-4xl;
+	}
+	h2 {
+		@apply mb-6 mt-12 text-2xl;
+	}
+	h3 {
+		@apply mb-4 mt-0 text-xl;
+	}
+	p {
+		@apply mb-6 leading-7;
+	}
 
-  a {
-    @apply text-[#19191C] dark:text-gray-300 no-underline font-normal hover:underline;
-  }
+	a {
+		@apply font-normal text-[#19191C] no-underline hover:underline dark:text-gray-300;
+	}
 
-  ul {
-    @apply mb-6 list-disc pl-6;
-  }
-  ol {
-    @apply mb-6 list-decimal pl-6;
-  }
-  li {
-    @apply mb-2;
-  }
+	ul {
+		@apply mb-6 list-disc pl-6;
+	}
+	ol {
+		@apply mb-6 list-decimal pl-6;
+	}
+	li {
+		@apply mb-2;
+	}
 
-  table {
-    @apply w-full mb-6;
-  }
-  th {
-    @apply text-left py-2 px-4 border-b-2 border-gray-200 dark:border-gray-700 font-medium;
-  }
-  td {
-    @apply py-2 px-4 border-b border-gray-200 dark:border-gray-700;
-  }
+	table {
+		@apply mb-6 w-full;
+	}
+	th {
+		@apply border-b-2 border-gray-200 px-4 py-2 text-left font-medium dark:border-neutral-700;
+	}
+	td {
+		@apply border-b border-gray-200 px-4 py-2 dark:border-neutral-700;
+	}
 
-  blockquote {
-    @apply pl-4 border-l-4 border-gray-200 dark:border-gray-700 italic my-6;
-  }
+	blockquote {
+		@apply my-6 border-l-4 border-gray-200 pl-4 italic dark:border-neutral-700;
+	}
 }
 
 /* Code Blocks */
 .prose {
-  pre[class*='language-'] {
-    @apply p-4 rounded-lg overflow-x-auto mb-6 border border-gray-100 dark:border-transparent;
-    background-color: var(--prism-background) !important;
-    color: var(--prism-color);
-  }
+	pre[class*='language-'] {
+		@apply mb-6 overflow-x-auto rounded-lg border border-gray-100 p-4 dark:border-transparent;
+		background-color: var(--prism-background) !important;
+		color: var(--prism-color);
+	}
 
-  :not(pre) > code {
-    @apply bg-white dark:bg-gray-800 px-1.5 py-0.5 rounded border border-gray-100 dark:border-transparent;
-  }
+	:not(pre) > code {
+		@apply rounded border border-gray-100 bg-white px-1.5 py-0.5 dark:border-transparent dark:bg-neutral-800;
+	}
 
-  code {
-    @apply text-sm font-mono;
-  }
+	code {
+		@apply font-mono text-sm;
+	}
 
-  code[class*='language-'] {
-    @apply bg-transparent p-0;
-    color: var(--prism-color);
-  }
+	code[class*='language-'] {
+		@apply bg-transparent p-0;
+		color: var(--prism-color);
+	}
 }
 
 /* Prism Token Styles */
 .token {
-  &.comment,
-  &.prolog,
-  &.doctype,
-  &.cdata {
-    @apply text-gray-500 dark:text-gray-400;
-  }
+	&.comment,
+	&.prolog,
+	&.doctype,
+	&.cdata {
+		@apply text-gray-500 dark:text-gray-400;
+	}
 
-  &.punctuation {
-    @apply text-gray-700 dark:text-gray-300;
-  }
+	&.punctuation {
+		@apply text-gray-700 dark:text-gray-300;
+	}
 
-  &.property,
-  &.tag,
-  &.boolean,
-  &.number,
-  &.constant,
-  &.symbol,
-  &.deleted {
-    @apply text-blue-600 dark:text-blue-400;
-  }
+	&.property,
+	&.tag,
+	&.boolean,
+	&.number,
+	&.constant,
+	&.symbol,
+	&.deleted {
+		@apply text-blue-600 dark:text-blue-400;
+	}
 
-  &.selector,
-  &.attr-name,
-  &.string,
-  &.char,
-  &.builtin,
-  &.inserted {
-    @apply text-green-600 dark:text-green-400;
-  }
+	&.selector,
+	&.attr-name,
+	&.string,
+	&.char,
+	&.builtin,
+	&.inserted {
+		@apply text-green-600 dark:text-green-400;
+	}
 
-  &.operator,
-  &.entity,
-  &.url,
-  .language-css &.string,
-  .style &.string {
-    @apply text-yellow-600 dark:text-yellow-400;
-  }
+	&.operator,
+	&.entity,
+	&.url,
+	.language-css &.string,
+	.style &.string {
+		@apply text-yellow-600 dark:text-yellow-400;
+	}
 
-  &.atrule,
-  &.attr-value,
-  &.keyword {
-    @apply text-purple-600 dark:text-purple-400;
-  }
+	&.atrule,
+	&.attr-value,
+	&.keyword {
+		@apply text-purple-600 dark:text-purple-400;
+	}
 
-  &.function,
-  &.class-name {
-    @apply text-red-600 dark:text-red-400;
-  }
+	&.function,
+	&.class-name {
+		@apply text-red-600 dark:text-red-400;
+	}
 
-  &.regex,
-  &.important,
-  &.variable {
-    @apply text-orange-600 dark:text-orange-400;
-  }
+	&.regex,
+	&.important,
+	&.variable {
+		@apply text-orange-600 dark:text-orange-400;
+	}
 }
 
 /* Layout Components */
 .site-title {
-  @apply flex items-center gap-2 px-4 py-3 text-lg font-semibold;
+	@apply flex items-center gap-2 px-4 py-3 text-lg font-semibold;
 
-  .documentation {
-    @apply text-gray-400 font-normal;
-  }
+	.documentation {
+		@apply font-normal text-gray-400;
+	}
 }
 
 .content-panel {
-  @apply max-w-none;
+	@apply max-w-none;
 }
 
 main {
-  @apply px-8 py-6;
+	@apply px-8 py-6;
 }
 
 /* Navigation */
 .sidebar {
-  @apply h-full py-4;
+	@apply h-full py-4;
 }
 
 .nav-section {
-  @apply space-y-1;
+	@apply space-y-1;
 }
 
 .nav-item {
-  @apply block py-2 px-4 text-[15px] text-[color:var(--color-text-secondary)]
-         hover:text-[color:var(--color-text-primary)] no-underline transition-colors border-none;
+	@apply block border-none px-4 py-2 text-[15px] text-[color:var(--color-text-secondary)] no-underline transition-colors hover:text-[color:var(--color-text-primary)];
 
-  &[aria-current='page'] {
-    @apply bg-[#F4F4F7] text-[color:var(--color-text-primary)] font-normal dark:bg-gray-800 dark:text-white;
-  }
+	&[aria-current='page'] {
+		@apply bg-[#F4F4F7] font-normal text-[color:var(--color-text-primary)] dark:bg-neutral-800 dark:text-white;
+	}
 }
 
 .section-header {
-  @apply px-4 py-2 text-xs font-medium text-[color:var(--color-text-primary)] uppercase tracking-wider dark:text-gray-500;
+	@apply px-4 py-2 text-xs font-medium uppercase tracking-wider text-[color:var(--color-text-primary)] dark:text-gray-500;
 }
 
 .nav-items {
-  @apply space-y-0.5;
+	@apply space-y-0.5;
 }
 
 /* Section dividers */
 .sidebar > div > div:not(:last-child) {
-  @apply border-b border-gray-100 mb-4 pb-4 dark:border-gray-800;
+	@apply mb-4 border-b border-gray-100 pb-4 dark:border-neutral-800;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .prose {
-    h1 {
-      @apply text-3xl;
-    }
-    h2 {
-      @apply text-xl;
-    }
-    h3 {
-      @apply text-lg;
-    }
-  }
+	.prose {
+		h1 {
+			@apply text-3xl;
+		}
+		h2 {
+			@apply text-xl;
+		}
+		h3 {
+			@apply text-lg;
+		}
+	}
 }

@@ -73,24 +73,24 @@ Elevation tokens control:
 
 ```css
 .button {
-  background-color: var(--color-primary-600);
-  padding: var(--spacing-4);
-  border-radius: var(--radius-md);
+	background-color: var(--color-primary-600);
+	padding: var(--spacing-4);
+	border-radius: var(--radius-md);
 }
 ```
 
 ### In Tailwind
 
 ```html
-<button class="bg-primary-600 p-4 rounded-md">Click me</button>
+<button class="rounded-md bg-primary-600 p-4">Click me</button>
 ```
 
 ### In JavaScript
 
 ```js
-import { tokens } from '@acme/design-system'
+import { tokens } from '@acme/design-system';
 
-console.log(tokens.colors.primary[600]) // #0284c7
+console.log(tokens.colors.primary[600]); // #0284c7
 ```
 
 ## Token Reference

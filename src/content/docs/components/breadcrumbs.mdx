@@ -4,7 +4,7 @@ group: Components
 description: A navigation component that helps users understand their current location in a hierarchical structure.
 ---
 
-import { Tabs, TabItem } from '@components/mdx'
+import { Tabs, TabItem } from '@components/mdx';
 
 The Breadcrumbs component displays a horizontal list of links that show the user's current location in a hierarchical navigation structure. It helps users understand where they are and provides quick navigation to parent pages.
 
@@ -12,10 +12,10 @@ The Breadcrumbs component displays a horizontal list of links that show the user
 
 ```jsx
 <Breadcrumbs>
-  <BreadcrumbItem href="/">Home</BreadcrumbItem>
-  <BreadcrumbItem href="/products">Products</BreadcrumbItem>
-  <BreadcrumbItem href="/products/electronics">Electronics</BreadcrumbItem>
-  <BreadcrumbItem>Laptops</BreadcrumbItem>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/products">Products</BreadcrumbItem>
+	<BreadcrumbItem href="/products/electronics">Electronics</BreadcrumbItem>
+	<BreadcrumbItem>Laptops</BreadcrumbItem>
 </Breadcrumbs>
 ```
 
@@ -42,48 +42,48 @@ The Breadcrumbs component displays a horizontal list of links that show the user
 
 ```css
 .breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	font-size: var(--font-size-sm);
 }
 
 .breadcrumb-item {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  color: var(--foreground-muted);
-  text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	color: var(--foreground-muted);
+	text-decoration: none;
 }
 
 .breadcrumb-item:hover {
-  color: var(--foreground-default);
-  text-decoration: underline;
+	color: var(--foreground-default);
+	text-decoration: underline;
 }
 
 .breadcrumb-item[aria-current='page'] {
-  color: var(--foreground-default);
-  font-weight: var(--font-weight-medium);
-  pointer-events: none;
+	color: var(--foreground-default);
+	font-weight: var(--font-weight-medium);
+	pointer-events: none;
 }
 
 .breadcrumb-separator {
-  color: var(--foreground-muted);
-  user-select: none;
+	color: var(--foreground-muted);
+	user-select: none;
 }
 
 .breadcrumb-collapse {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--spacing-1);
-  color: var(--foreground-muted);
-  cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	padding: var(--spacing-1);
+	color: var(--foreground-muted);
+	cursor: pointer;
 }
 
 .breadcrumb-collapse:hover {
-  color: var(--foreground-default);
-  background: var(--background-hover);
-  border-radius: var(--radius-sm);
+	color: var(--foreground-default);
+	background: var(--background-hover);
+	border-radius: var(--radius-sm);
 }
 ```
 
@@ -123,9 +123,9 @@ The Breadcrumbs component displays a horizontal list of links that show the user
 
 ```jsx
 <Breadcrumbs>
-  <BreadcrumbItem href="/">Home</BreadcrumbItem>
-  <BreadcrumbItem href="/settings">Settings</BreadcrumbItem>
-  <BreadcrumbItem>Profile</BreadcrumbItem>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/settings">Settings</BreadcrumbItem>
+	<BreadcrumbItem>Profile</BreadcrumbItem>
 </Breadcrumbs>
 ```
 
@@ -133,9 +133,9 @@ The Breadcrumbs component displays a horizontal list of links that show the user
 
 ```jsx
 <Breadcrumbs separator=">">
-  <BreadcrumbItem href="/">Home</BreadcrumbItem>
-  <BreadcrumbItem href="/docs">Documentation</BreadcrumbItem>
-  <BreadcrumbItem>Components</BreadcrumbItem>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/docs">Documentation</BreadcrumbItem>
+	<BreadcrumbItem>Components</BreadcrumbItem>
 </Breadcrumbs>
 ```
 
@@ -143,13 +143,13 @@ The Breadcrumbs component displays a horizontal list of links that show the user
 
 ```jsx
 <Breadcrumbs>
-  <BreadcrumbItem href="/" icon={<HomeIcon />}>
-    Home
-  </BreadcrumbItem>
-  <BreadcrumbItem href="/files" icon={<FolderIcon />}>
-    Files
-  </BreadcrumbItem>
-  <BreadcrumbItem icon={<DocumentIcon />}>Document.pdf</BreadcrumbItem>
+	<BreadcrumbItem href="/" icon={<HomeIcon />}>
+		Home
+	</BreadcrumbItem>
+	<BreadcrumbItem href="/files" icon={<FolderIcon />}>
+		Files
+	</BreadcrumbItem>
+	<BreadcrumbItem icon={<DocumentIcon />}>Document.pdf</BreadcrumbItem>
 </Breadcrumbs>
 ```
 
@@ -157,13 +157,11 @@ The Breadcrumbs component displays a horizontal list of links that show the user
 
 ```jsx
 <Breadcrumbs maxItems={4} itemsBeforeCollapse={2} itemsAfterCollapse={1}>
-  <BreadcrumbItem href="/">Home</BreadcrumbItem>
-  <BreadcrumbItem href="/products">Products</BreadcrumbItem>
-  <BreadcrumbItem href="/products/electronics">Electronics</BreadcrumbItem>
-  <BreadcrumbItem href="/products/electronics/computers">
-    Computers
-  </BreadcrumbItem>
-  <BreadcrumbItem>Laptops</BreadcrumbItem>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/products">Products</BreadcrumbItem>
+	<BreadcrumbItem href="/products/electronics">Electronics</BreadcrumbItem>
+	<BreadcrumbItem href="/products/electronics/computers">Computers</BreadcrumbItem>
+	<BreadcrumbItem>Laptops</BreadcrumbItem>
 </Breadcrumbs>
 ```
 

@@ -4,7 +4,7 @@ group: Components
 description: A component that displays important messages or feedback to users.
 ---
 
-import { Tabs, TabItem } from '@components/mdx'
+import { Tabs, TabItem } from '@components/mdx';
 
 The Alert component is used to communicate important messages, feedback, or status information to users. It supports different variants to convey different types of information.
 
@@ -12,11 +12,10 @@ The Alert component is used to communicate important messages, feedback, or stat
 
 ```jsx
 <Alert variant="info">
-  <AlertTitle>Update Available</AlertTitle>
-  <AlertDescription>
-    A new software version is available. Please update to access the latest
-    features.
-  </AlertDescription>
+	<AlertTitle>Update Available</AlertTitle>
+	<AlertDescription>
+		A new software version is available. Please update to access the latest features.
+	</AlertDescription>
 </Alert>
 ```
 
@@ -46,44 +45,44 @@ The Alert component is used to communicate important messages, feedback, or stat
 
 ```css
 .alert {
-  border-radius: var(--radius-md);
-  padding: var(--spacing-4);
-  display: flex;
-  gap: var(--spacing-3);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-4);
+	display: flex;
+	gap: var(--spacing-3);
 }
 
 .alert[data-variant='info'] {
-  background: var(--info-background);
-  border: 1px solid var(--info-border);
-  color: var(--info-foreground);
+	background: var(--info-background);
+	border: 1px solid var(--info-border);
+	color: var(--info-foreground);
 }
 
 .alert[data-variant='success'] {
-  background: var(--success-background);
-  border: 1px solid var(--success-border);
-  color: var(--success-foreground);
+	background: var(--success-background);
+	border: 1px solid var(--success-border);
+	color: var(--success-foreground);
 }
 
 .alert[data-variant='warning'] {
-  background: var(--warning-background);
-  border: 1px solid var(--warning-border);
-  color: var(--warning-foreground);
+	background: var(--warning-background);
+	border: 1px solid var(--warning-border);
+	color: var(--warning-foreground);
 }
 
 .alert[data-variant='error'] {
-  background: var(--error-background);
-  border: 1px solid var(--error-border);
-  color: var(--error-foreground);
+	background: var(--error-background);
+	border: 1px solid var(--error-border);
+	color: var(--error-foreground);
 }
 
 .alert-title {
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-tight);
 }
 
 .alert-description {
-  margin-top: var(--spacing-1);
-  line-height: var(--line-height-normal);
+	margin-top: var(--spacing-1);
+	line-height: var(--line-height-normal);
 }
 ```
 
@@ -142,10 +141,8 @@ The Alert component is used to communicate important messages, feedback, or stat
 
 ```jsx
 <Alert variant="info" icon={<CustomIcon />}>
-  <AlertTitle>Custom Alert</AlertTitle>
-  <AlertDescription>
-    This alert uses a custom icon instead of the default one.
-  </AlertDescription>
+	<AlertTitle>Custom Alert</AlertTitle>
+	<AlertDescription>This alert uses a custom icon instead of the default one.</AlertDescription>
 </Alert>
 ```
 
@@ -153,9 +150,9 @@ The Alert component is used to communicate important messages, feedback, or stat
 
 ```jsx
 <Alert variant="success" onClose={() => console.log('Alert dismissed')}>
-  <AlertTitle>Success!</AlertTitle>
-  <AlertDescription>
-    Your profile has been updated. Click the X to dismiss this message.
-  </AlertDescription>
+	<AlertTitle>Success!</AlertTitle>
+	<AlertDescription>
+		Your profile has been updated. Click the X to dismiss this message.
+	</AlertDescription>
 </Alert>
 ```
