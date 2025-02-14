@@ -1,0 +1,114 @@
+---
+title: Accordion
+group: Components
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+import { Tabs, TabItem } from '@components/mdx';
+
+The Accordion component is used to organize and hide content behind expandable sections, helping to reduce visual clutter while keeping information accessible.
+
+## Usage
+
+```jsx
+<Accordion>
+	<AccordionItem>
+		<AccordionTrigger>Is it accessible?</AccordionTrigger>
+		<AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+	</AccordionItem>
+</Accordion>
+```
+
+## Props
+
+### Accordion
+
+| Prop            | Type                     | Default    | Description                                 |
+| --------------- | ------------------------ | ---------- | ------------------------------------------- |
+| `type`          | `'single' \| 'multiple'` | `'single'` | Determines if multiple sections can be open |
+| `defaultValue`  | `string`                 | -          | The value of the item to expand by default  |
+| `value`         | `string`                 | -          | The controlled value of the item to expand  |
+| `onValueChange` | `function`               | -          | Event handler called when value changes     |
+
+### AccordionItem
+
+| Prop       | Type      | Default | Description                          |
+| ---------- | --------- | ------- | ------------------------------------ |
+| `value`    | `string`  | -       | A unique value for the item          |
+| `disabled` | `boolean` | `false` | When true, prevents user interaction |
+
+## Styling
+
+```css
+.accordion {
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-default);
+}
+
+.accordion-trigger {
+	padding: var(--spacing-3);
+	font-weight: var(--font-weight-medium);
+}
+
+.accordion-content {
+	padding: var(--spacing-3);
+	border-top: 1px solid var(--border-default);
+}
+```
+
+## Accessibility
+
+- Uses appropriate ARIA attributes (`aria-expanded`, `aria-controls`)
+- Keyboard navigation support (Space, Enter, Arrow keys)
+- Focus management between trigger and content
+
+## Best Practices
+
+1. **Content Organization**
+
+   - Group related content together
+   - Use clear and concise headers
+   - Keep content length manageable
+
+2. **Interaction Design**
+
+   - Provide clear visual feedback for state changes
+   - Maintain consistent animation timing
+   - Consider mobile touch targets
+
+3. **Performance**
+   - Lazy load content when possible
+   - Optimize animations for smooth transitions
+   - Consider content reflow on expand/collapse
+
+## Examples
+
+### Single Expand
+
+```jsx
+<Accordion type="single" defaultValue="item-1">
+	<AccordionItem value="item-1">
+		<AccordionTrigger>Section 1</AccordionTrigger>
+		<AccordionContent>Content for section 1</AccordionContent>
+	</AccordionItem>
+	<AccordionItem value="item-2">
+		<AccordionTrigger>Section 2</AccordionTrigger>
+		<AccordionContent>Content for section 2</AccordionContent>
+	</AccordionItem>
+</Accordion>
+```
+
+### Multiple Expand
+
+```jsx
+<Accordion type="multiple">
+	<AccordionItem value="item-1">
+		<AccordionTrigger>Section 1</AccordionTrigger>
+		<AccordionContent>Content for section 1</AccordionContent>
+	</AccordionItem>
+	<AccordionItem value="item-2">
+		<AccordionTrigger>Section 2</AccordionTrigger>
+		<AccordionContent>Content for section 2</AccordionContent>
+	</AccordionItem>
+</Accordion>
+```

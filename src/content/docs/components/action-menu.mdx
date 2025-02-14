@@ -1,0 +1,148 @@
+---
+title: Action Menu
+group: Components
+description: A floating menu that appears on user interaction to display a list of actions or options.
+---
+
+import { Tabs, TabItem } from '@components/mdx';
+
+The Action Menu component combines a trigger element with a floating menu that contains a list of actions. It's commonly used for overflow actions, context menus, and command palettes.
+
+## Usage
+
+```jsx
+<ActionMenu>
+	<ActionMenuTrigger>
+		<Button>
+			Actions
+			<ChevronDownIcon />
+		</Button>
+	</ActionMenuTrigger>
+	<ActionMenuContent>
+		<ActionMenuItem onSelect={() => console.log('Edit')}>Edit</ActionMenuItem>
+		<ActionMenuItem onSelect={() => console.log('Delete')}>Delete</ActionMenuItem>
+	</ActionMenuContent>
+</ActionMenu>
+```
+
+## Props
+
+### ActionMenu
+
+| Prop           | Type       | Default | Description                            |
+| -------------- | ---------- | ------- | -------------------------------------- |
+| `open`         | `boolean`  | -       | Controlled open state                  |
+| `defaultOpen`  | `boolean`  | `false` | Initial open state                     |
+| `onOpenChange` | `function` | -       | Handler called when open state changes |
+
+### ActionMenuContent
+
+| Prop    | Type                                     | Default    | Description                         |
+| ------- | ---------------------------------------- | ---------- | ----------------------------------- |
+| `align` | `'start' \| 'center' \| 'end'`           | `'start'`  | Preferred alignment against trigger |
+| `side`  | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Preferred side of trigger           |
+
+### ActionMenuItem
+
+| Prop       | Type        | Default | Description                          |
+| ---------- | ----------- | ------- | ------------------------------------ |
+| `onSelect` | `function`  | -       | Handler called when item is selected |
+| `disabled` | `boolean`   | `false` | When true, prevents selection        |
+| `icon`     | `ReactNode` | -       | Optional leading icon                |
+
+## Styling
+
+```css
+.action-menu-content {
+	min-width: 220px;
+	background: var(--background-default);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-1);
+	box-shadow: var(--elevation-3);
+}
+
+.action-menu-item {
+	padding: var(--spacing-2) var(--spacing-3);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	cursor: pointer;
+}
+
+.action-menu-item:hover {
+	background: var(--background-hover);
+}
+
+.action-menu-item[data-disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+```
+
+## Accessibility
+
+- WAI-ARIA menu pattern implementation
+- Keyboard navigation (Arrow keys, Enter, Space)
+- Auto-focus management
+- Screen reader announcements
+- Click outside to dismiss
+
+## Best Practices
+
+1. **Menu Structure**
+
+   - Keep menu items concise
+   - Group related actions
+   - Use dividers to separate groups
+   - Consider using icons for visual aids
+
+2. **Interaction Design**
+
+   - Position menu within viewport
+   - Provide keyboard shortcuts
+   - Show hover and focus states
+   - Handle touch interactions
+
+3. **Performance**
+   - Lazy load menu content
+   - Optimize animations
+   - Consider mounting strategy
+
+## Examples
+
+### With Icons and Shortcuts
+
+```jsx
+<ActionMenu>
+	<ActionMenuTrigger>
+		<Button>File</Button>
+	</ActionMenuTrigger>
+	<ActionMenuContent>
+		<ActionMenuItem icon={<NewFileIcon />} shortcut="⌘N" onSelect={() => {}}>
+			New File
+		</ActionMenuItem>
+		<ActionMenuItem icon={<OpenIcon />} shortcut="⌘O" onSelect={() => {}}>
+			Open
+		</ActionMenuItem>
+		<ActionMenuSeparator />
+		<ActionMenuItem icon={<SaveIcon />} shortcut="⌘S" onSelect={() => {}}>
+			Save
+		</ActionMenuItem>
+	</ActionMenuContent>
+</ActionMenu>
+```
+
+### Context Menu
+
+```jsx
+<ActionMenu>
+	<ActionMenuTrigger>
+		<div onContextMenu={(e) => e.preventDefault()}>Right click me</div>
+	</ActionMenuTrigger>
+	<ActionMenuContent>
+		<ActionMenuItem onSelect={() => {}}>Cut</ActionMenuItem>
+		<ActionMenuItem onSelect={() => {}}>Copy</ActionMenuItem>
+		<ActionMenuItem onSelect={() => {}}>Paste</ActionMenuItem>
+	</ActionMenuContent>
+</ActionMenu>
+```

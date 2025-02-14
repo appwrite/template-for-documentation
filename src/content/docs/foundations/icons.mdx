@@ -1,0 +1,73 @@
+---
+title: Icons
+group: Foundations
+description: Our icon system and guidelines for consistent visual communication.
+---
+
+import { Tabs, TabItem } from '@components/mdx';
+
+Our icon system provides a consistent visual language across our applications. We use a curated set of icons that maintain clarity and meaning at various sizes.
+
+## Icon Set
+
+We use [Phosphor Icons](https://phosphoricons.com/) as our primary icon library, which provides a comprehensive set of icons in multiple weights.
+
+## Size Tokens
+
+| Token Name | Value  | Usage                          |
+| ---------- | ------ | ------------------------------ |
+| `icon-xs`  | `12px` | Very small UI elements         |
+| `icon-sm`  | `16px` | Default size for most contexts |
+| `icon-md`  | `20px` | Primary UI elements            |
+| `icon-lg`  | `24px` | Featured UI elements           |
+| `icon-xl`  | `32px` | Hero sections, marketing       |
+
+## Weight Variants
+
+- Regular (default)
+- Light
+- Bold
+- Fill
+
+## Usage Guidelines
+
+### Implementation
+
+```jsx
+import { House, User, Gear } from '@phosphor-icons/react'
+
+// Basic usage
+<House size={20} />
+
+// With weight variant
+<User size={20} weight="bold" />
+
+// With color
+<Gear size={20} color="#5046e4" />
+```
+
+### Best Practices
+
+1. **Consistency**
+
+   - Use consistent icon sizes within similar contexts
+   - Maintain consistent weight variants within sections
+   - Align icons with your typography scale
+
+2. **Accessibility**
+
+   - Always provide aria-labels for icon buttons
+   - Ensure sufficient color contrast
+   - Use icons to enhance, not replace, text labels
+
+3. **Performance**
+   - Import icons individually to reduce bundle size
+   - Consider using sprite sheets for frequently used icons
+
+## Icon Guidelines
+
+- Use icons sparingly to avoid visual noise
+- Ensure icons are recognizable and meaningful
+- Maintain adequate spacing around icons
+- Consider touch targets for interactive icons (minimum 44x44px)
+- Use consistent colors that align with your color system

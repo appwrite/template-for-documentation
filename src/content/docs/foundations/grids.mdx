@@ -1,0 +1,95 @@
+---
+title: Grids
+group: Foundations
+description: Our grid system for creating consistent layouts across applications.
+---
+
+import { Tabs, TabItem } from '@components/mdx';
+
+Our grid system provides a flexible foundation for creating consistent layouts across different screen sizes. It uses CSS Grid and is built to be responsive and adaptable.
+
+## Grid System
+
+### Container Sizes
+
+| Breakpoint | Width    | Usage          |
+| ---------- | -------- | -------------- |
+| `xs`       | `100%`   | Mobile devices |
+| `sm`       | `640px`  | Small tablets  |
+| `md`       | `768px`  | Tablets        |
+| `lg`       | `1024px` | Laptops        |
+| `xl`       | `1280px` | Desktops       |
+| `2xl`      | `1536px` | Large screens  |
+
+### Column System
+
+We use a 12-column grid system that can be subdivided as needed:
+
+- Full width: 12 columns
+- Half width: 6 columns
+- Third width: 4 columns
+- Quarter width: 3 columns
+
+## Usage
+
+### Basic Grid
+
+```jsx
+<div class="grid grid-cols-12 gap-4">
+	<div class="col-span-12 md:col-span-6">Content</div>
+	<div class="col-span-12 md:col-span-6">Content</div>
+</div>
+```
+
+### Grid Gap Tokens
+
+| Token Name | Value     | Usage               |
+| ---------- | --------- | ------------------- |
+| `gap-0`    | `0px`     | No gap              |
+| `gap-1`    | `0.25rem` | Tight spacing       |
+| `gap-2`    | `0.5rem`  | Default spacing     |
+| `gap-4`    | `1rem`    | Comfortable spacing |
+| `gap-6`    | `1.5rem`  | Loose spacing       |
+| `gap-8`    | `2rem`    | Maximum spacing     |
+
+## Best Practices
+
+1. **Responsive Design**
+
+   - Always design with mobile-first approach
+   - Use appropriate breakpoints for different devices
+   - Test layouts across different screen sizes
+
+2. **Consistency**
+
+   - Maintain consistent column counts within sections
+   - Use standard gap sizes throughout the application
+   - Align grid elements with typography and spacing system
+
+3. **Accessibility**
+   - Ensure logical content flow in mobile views
+   - Maintain readability when columns reflow
+   - Consider content hierarchy in responsive layouts
+
+## Examples
+
+### Responsive Layout
+
+```jsx
+<div class="grid grid-cols-12 gap-4">
+	{/* Full width on mobile, half width on tablet and up */}
+	<div class="col-span-12 md:col-span-6">
+		<div class="card">Content</div>
+	</div>
+
+	{/* Full width on mobile, quarter width on tablet and up */}
+	<div class="col-span-12 md:col-span-3">
+		<div class="card">Sidebar</div>
+	</div>
+
+	{/* Full width on mobile, quarter width on tablet and up */}
+	<div class="col-span-12 md:col-span-3">
+		<div class="card">Sidebar</div>
+	</div>
+</div>
+```

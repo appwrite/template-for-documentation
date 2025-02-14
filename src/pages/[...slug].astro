@@ -1,0 +1,23 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import MDXLayout from '../layouts/MDXLayout.astro'
+
+// Get the current slug from the URL
+const { slug } = Astro.params
+
+// Get all docs
+const docs = await getCollection('docs')
+
+// Find the matching entry
+const entry = docs.find((doc) => {
+  if (!slug) return doc.slug === 'index'
+  return doc.slug === slug
+})
+
+// If no matching entry is found, return 404
+if (!entry) {
+  return Astro.redirect('/404')
+}
+---
+
+<MDXLayout entry={entry} />

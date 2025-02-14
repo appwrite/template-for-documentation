@@ -1,0 +1,43 @@
+---
+title: Border Radius
+group: Foundations
+description: Our border radius design tokens and usage guidelines.
+---
+
+import { Tabs, TabItem } from '@components/mdx';
+
+Border radius helps create a consistent visual language across our interfaces by defining how rounded corners should appear. We use a set of predefined border radius values to maintain consistency and harmony in our design system.
+
+## Tokens
+
+| Token Name    | Value    | Usage                                       |
+| ------------- | -------- | ------------------------------------------- |
+| `radius-none` | `0px`    | No border radius                            |
+| `radius-sm`   | `4px`    | Subtle rounding for small elements          |
+| `radius-md`   | `8px`    | Default rounding for most components        |
+| `radius-lg`   | `12px`   | More prominent rounding for larger elements |
+| `radius-xl`   | `16px`   | Maximum rounding for special components     |
+| `radius-full` | `9999px` | Fully rounded corners (circles/pills)       |
+
+## Usage Guidelines
+
+- Use `radius-md` as the default choice for most components
+- Apply `radius-sm` for smaller elements like badges or tags
+- Use `radius-lg` or `radius-xl` for cards and modal dialogs
+- Apply `radius-full` for circular elements like avatars or pill-shaped buttons
+
+## Examples
+
+```css
+.button {
+	border-radius: var(--radius-md);
+}
+
+.badge {
+	border-radius: var(--radius-sm);
+}
+
+.avatar {
+	border-radius: var(--radius-full);
+}
+```

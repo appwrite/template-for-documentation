@@ -1,0 +1,98 @@
+---
+title: Design Tokens
+group: Overview
+description: Learn about our design tokens and how to use them in your projects.
+priority: 2
+---
+
+Design tokens are the visual design atoms of our design system. They help maintain consistent styling across all our products.
+
+## What are Design Tokens?
+
+Design tokens are named entities that store visual design attributes. They are used in place of hard-coded values to ensure flexibility and consistency across platforms.
+
+## Token Categories
+
+### Colors
+
+Our color tokens include:
+
+- Brand colors
+- UI colors
+- Semantic colors
+- Gradient colors
+
+[Learn more about colors →](/foundations/colors)
+
+### Typography
+
+Typography tokens include:
+
+- Font families
+- Font sizes
+- Font weights
+- Line heights
+- Letter spacing
+
+[Learn more about typography →](/foundations/typography)
+
+### Spacing
+
+Spacing tokens control:
+
+- Margins
+- Padding
+- Gap sizes
+- Layout spacing
+
+[Learn more about spacing →](/foundations/spacing)
+
+### Border Radius
+
+Border radius tokens define:
+
+- Corner roundness
+- Component shapes
+- UI element edges
+
+[Learn more about border radius →](/foundations/border-radius)
+
+### Elevation
+
+Elevation tokens control:
+
+- Shadow styles
+- Z-index layers
+- 3D positioning
+
+[Learn more about elevation →](/foundations/elevation)
+
+## Using Tokens
+
+### In CSS
+
+```css
+.button {
+	background-color: var(--color-primary-600);
+	padding: var(--spacing-4);
+	border-radius: var(--radius-md);
+}
+```
+
+### In Tailwind
+
+```html
+<button class="rounded-md bg-primary-600 p-4">Click me</button>
+```
+
+### In JavaScript
+
+```js
+import { tokens } from '@acme/design-system';
+
+console.log(tokens.colors.primary[600]); // #0284c7
+```
+
+## Token Reference
+
+For a complete list of all available tokens, check out our individual foundation pages in the sidebar.

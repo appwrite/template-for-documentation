@@ -1,0 +1,189 @@
+---
+title: Breadcrumbs
+group: Components
+description: A navigation component that helps users understand their current location in a hierarchical structure.
+---
+
+import { Tabs, TabItem } from '@components/mdx';
+
+The Breadcrumbs component displays a horizontal list of links that show the user's current location in a hierarchical navigation structure. It helps users understand where they are and provides quick navigation to parent pages.
+
+## Usage
+
+```jsx
+<Breadcrumbs>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/products">Products</BreadcrumbItem>
+	<BreadcrumbItem href="/products/electronics">Electronics</BreadcrumbItem>
+	<BreadcrumbItem>Laptops</BreadcrumbItem>
+</Breadcrumbs>
+```
+
+## Props
+
+### Breadcrumbs
+
+| Prop                  | Type                  | Default | Description                        |
+| --------------------- | --------------------- | ------- | ---------------------------------- |
+| `separator`           | `string \| ReactNode` | `/`     | Custom separator between items     |
+| `maxItems`            | `number`              | -       | Maximum number of items to display |
+| `itemsBeforeCollapse` | `number`              | `1`     | Items to show before collapse      |
+| `itemsAfterCollapse`  | `number`              | `1`     | Items to show after collapse       |
+
+### BreadcrumbItem
+
+| Prop      | Type        | Default | Description            |
+| --------- | ----------- | ------- | ---------------------- |
+| `href`    | `string`    | -       | Navigation URL         |
+| `icon`    | `ReactNode` | -       | Optional leading icon  |
+| `current` | `boolean`   | `false` | Indicates current page |
+
+## Styling
+
+```css
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	font-size: var(--font-size-sm);
+}
+
+.breadcrumb-item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	color: var(--foreground-muted);
+	text-decoration: none;
+}
+
+.breadcrumb-item:hover {
+	color: var(--foreground-default);
+	text-decoration: underline;
+}
+
+.breadcrumb-item[aria-current='page'] {
+	color: var(--foreground-default);
+	font-weight: var(--font-weight-medium);
+	pointer-events: none;
+}
+
+.breadcrumb-separator {
+	color: var(--foreground-muted);
+	user-select: none;
+}
+
+.breadcrumb-collapse {
+	display: inline-flex;
+	align-items: center;
+	padding: var(--spacing-1);
+	color: var(--foreground-muted);
+	cursor: pointer;
+}
+
+.breadcrumb-collapse:hover {
+	color: var(--foreground-default);
+	background: var(--background-hover);
+	border-radius: var(--radius-sm);
+}
+```
+
+## Accessibility
+
+- Uses semantic HTML list structure
+- Proper ARIA roles and labels
+- Keyboard navigation support
+- Clear visual indication of current page
+- Screen reader announcements for separators
+
+## Best Practices
+
+1. **Navigation Structure**
+
+   - Keep hierarchy shallow
+   - Use clear and concise labels
+   - Show current location clearly
+   - Consider URL structure
+
+2. **Visual Design**
+
+   - Use consistent spacing
+   - Make links clearly clickable
+   - Consider mobile wrapping
+   - Use appropriate separators
+
+3. **Interaction**
+   - Handle long paths gracefully
+   - Consider hover states
+   - Maintain clickable areas
+   - Support keyboard navigation
+
+## Examples
+
+### Basic Usage
+
+```jsx
+<Breadcrumbs>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/settings">Settings</BreadcrumbItem>
+	<BreadcrumbItem>Profile</BreadcrumbItem>
+</Breadcrumbs>
+```
+
+### With Custom Separator
+
+```jsx
+<Breadcrumbs separator=">">
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/docs">Documentation</BreadcrumbItem>
+	<BreadcrumbItem>Components</BreadcrumbItem>
+</Breadcrumbs>
+```
+
+### With Icons
+
+```jsx
+<Breadcrumbs>
+	<BreadcrumbItem href="/" icon={<HomeIcon />}>
+		Home
+	</BreadcrumbItem>
+	<BreadcrumbItem href="/files" icon={<FolderIcon />}>
+		Files
+	</BreadcrumbItem>
+	<BreadcrumbItem icon={<DocumentIcon />}>Document.pdf</BreadcrumbItem>
+</Breadcrumbs>
+```
+
+### With Collapse
+
+```jsx
+<Breadcrumbs maxItems={4} itemsBeforeCollapse={2} itemsAfterCollapse={1}>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbItem href="/products">Products</BreadcrumbItem>
+	<BreadcrumbItem href="/products/electronics">Electronics</BreadcrumbItem>
+	<BreadcrumbItem href="/products/electronics/computers">Computers</BreadcrumbItem>
+	<BreadcrumbItem>Laptops</BreadcrumbItem>
+</Breadcrumbs>
+```
+
+### Dynamic Generation
+
+```jsx
+const paths = [
+  { label: 'Home', href: '/' },
+  { label: 'Users', href: '/users' },
+  { label: 'Settings', href: '/users/settings' },
+  { label: 'Profile' }
+]
+
+<Breadcrumbs>
+  {paths.map((path, index) => (
+    <BreadcrumbItem
+      key={path.href || index}
+      href={path.href}
+      current={index === paths.length - 1}
+    >
+      {path.label}
+    </BreadcrumbItem>
+  ))}
+</Breadcrumbs>
+```
