@@ -89,7 +89,7 @@
 	}
 
 	code {
-		@apply font-mono text-sm;
+		@apply p-[8px_0] font-mono text-sm;
 	}
 
 	code[class*='language-'] {
@@ -97,25 +97,25 @@
 		color: var(--prism-color);
 	}
 
-	.code-block pre {
-		display: flex;
-		flex-direction: column;
-		counter-reset: line-number;
+	pre.line-numbers {
+		position: relative;
+		counter-reset: code-line;
 	}
 
-	.code-block .line-number {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		counter-increment: line-number;
-	}
-
-	.code-block .line-number::before {
-		content: counter(line-number);
-		width: 30px;
+	pre.line-numbers code .code-line {
+		max-height: 20px;
 		text-align: right;
-		padding-right: 10px;
-		color: gray;
+		padding-left: 2.5rem;
+	}
+
+	pre.line-numbers code .code-line::before {
+		left: 0;
+		width: 1.5rem;
+		color: #97979b;
+		text-align: right;
+		position: absolute;
+		counter-increment: code-line;
+		content: counter(code-line);
 	}
 }
 

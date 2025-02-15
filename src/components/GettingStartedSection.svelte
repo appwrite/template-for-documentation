@@ -34,7 +34,7 @@
 					variant="secondary"
 					className="rounded-lg text-white px-[10px] py-[8px] h-[32px]"
 					on:click={() => {
-						window.open('https://github.com/ebenezerdon/docs-template', '_blank');
+						window.open('https://github.com/appwrite/template-for-documentation', '_blank');
 					}}
 				>
 					<div class="flex items-center justify-center gap-[6px]">

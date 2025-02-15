@@ -1,5 +1,60 @@
 import { visit } from 'unist-util-visit';
 
+function splitNodeByNewlines(node) {
+	if (node.type === 'text') {
+		if (!node.value.includes('\n')) {
+			return [[node]];
+		}
+		const segments = node.value.split('\n');
+		return segments.map((segment) => {
+			return segment === '' ? [] : [{ type: 'text', value: segment }];
+		});
+	}
+
+	if (node.type === 'element' && Array.isArray(node.children)) {
+		let lines = [[]];
+
+		node.children.forEach((child) => {
+			const childLines = splitNodeByNewlines(child);
+			lines[lines.length - 1].push(...childLines[0]);
+			for (let i = 1; i < childLines.length; i++) {
+				lines.push(childLines[i]);
+			}
+		});
+		return lines.map((lineChildren) => {
+			return [
+				{
+					...node,
+					children: lineChildren
+				}
+			];
+		});
+	}
+
+	return [[node]];
+}
+
+function wrapLinesInCodeLine(lines) {
+	while (lines.length && lines[lines.length - 1].length === 0) {
+		lines.pop();
+	}
+
+	return lines.map((lineNodes, i) => {
+		const isLastLine = i === lines.length - 1;
+		const children = [...lineNodes];
+		if (!isLastLine) {
+			children.push({ type: 'text', value: '\n' });
+		}
+
+		return {
+			type: 'element',
+			tagName: 'span',
+			properties: { className: ['code-line'] },
+			children
+		};
+	});
+}
+
 const copyIcon = {
 	type: 'element',
 	tagName: 'svg',
@@ -34,6 +89,15 @@ export function rehypeCopyButton() {
 	return (tree) => {
 		visit(tree, 'element', (node, index, parent) => {
 			if (node.tagName === 'pre' && Array.isArray(node.children)) {
+				const codeElement = node.children.find((child) => child.tagName === 'code');
+				if (!codeElement) return;
+
+				const lines = [];
+				splitNodeByNewlines(codeElement).forEach((line) => lines.push(line));
+
+				codeElement.children = wrapLinesInCodeLine(lines);
+				node.properties.className = [...(node.properties.className || []), 'line-numbers'];
+
 				const className = node.properties?.className?.find((cls) => cls.startsWith('language-'));
 				let languageTitle = className ? className.replace('language-', '') : 'text';
 				languageTitle = languageTitle === 'bash' ? 'terminal' : languageTitle;
@@ -94,16 +158,16 @@ export function rehypeCopyButton() {
 							{
 								type: 'text',
 								value: `
-                                function copyCode(button) {
-                                    const pre = button.closest(".code-block").querySelector("pre");
-                                    if (!pre) return;
+                  function copyCode(button) {
+                    const pre = button.closest(".code-block").querySelector("pre");
+                    if (!pre) return;
 
-                                    const code = pre.querySelector("code");
-                                    if (code) {
-                                        navigator.clipboard.writeText(code.innerText);
-                                    }
-                                }
-                            `
+                    const code = pre.querySelector("code");
+                    if (code) {
+                      navigator.clipboard.writeText(code.innerText.trimEnd());
+                    }
+                  }
+                `
 							}
 						]
 					});

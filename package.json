@@ -18,7 +18,8 @@
 		"astro": "^5.0.3",
 		"fuse.js": "^7.0.0",
 		"lucide-svelte": "^0.466.0",
-		"sharp": "^0.32.5"
+		"sharp": "^0.32.5",
+		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {
 		"@astrojs/svelte": "^7.0.1",

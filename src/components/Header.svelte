@@ -68,7 +68,7 @@
 			</div>
 
 			<a
-				href="https://github.com/ebenezerdon/docs-template"
+				href="https://github.com/appwrite/template-for-documentation"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-neutral-800"

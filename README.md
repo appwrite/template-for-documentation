@@ -19,7 +19,7 @@ A sleek and modern documentation site template built with Astro, Svelte, and Tai
 
 ```bash
 # Clone the repository
-git clone https://github.com/ebenezerdon/docs-template.git
+git clone https://github.com/appwrite/template-for-documentation.git
 
 # Navigate to the project
 cd docs-template
