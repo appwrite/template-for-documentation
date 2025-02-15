@@ -3,6 +3,7 @@ import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
+import { rehypeCopyButton } from './src/plugins/code-blocks.js';
 
 export default defineConfig({
 	output: 'server',
@@ -13,7 +14,8 @@ export default defineConfig({
 		syntaxHighlight: 'prism',
 		prism: {
 			languages: ['typescript', 'javascript', 'css', 'markup', 'bash', 'jsx']
-		}
+		},
+		rehypePlugins: [rehypeCopyButton]
 	},
 	integrations: [
 		svelte(),

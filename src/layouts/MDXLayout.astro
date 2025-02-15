@@ -1,35 +1,27 @@
 ---
-import DocsLayout from './DocsLayout.astro'
-import type { CollectionEntry } from 'astro:content'
-import * as MDXComponents from '@components/mdx'
-import MobileBreadcrumb from '@components/MobileBreadcrumb.svelte'
-import DesktopBreadcrumb from '@components/DesktopBreadcrumb.svelte'
-import GettingStartedSection from '@components/GettingStartedSection.svelte'
+import DocsLayout from './DocsLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import * as MDXComponents from '@components/mdx';
+import MobileBreadcrumb from '@components/MobileBreadcrumb.svelte';
+import DesktopBreadcrumb from '@components/DesktopBreadcrumb.svelte';
+import GettingStartedSection from '@components/GettingStartedSection.svelte';
 
 interface Props {
-  entry: CollectionEntry<'docs'>
+	entry: CollectionEntry<'docs'>;
 }
 
-const { entry } = Astro.props
-const { Content } = await entry.render()
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
 <DocsLayout title={entry.data.title} description={entry.data.description}>
-  <MobileBreadcrumb
-    client:load
-    group={entry.data.group}
-    title={entry.data.title}
-  />
-  <div class="prose dark:prose-invert max-w-none">
-    <DesktopBreadcrumb
-      client:load
-      group={entry.data.group}
-      title={entry.data.title}
-    />
+	<MobileBreadcrumb client:load group={entry.data.group} title={entry.data.title} />
+	<div class="prose dark:prose-invert max-w-none">
+		<DesktopBreadcrumb client:load group={entry.data.group} title={entry.data.title} />
 
-    <GettingStartedSection client:load />
+		<GettingStartedSection client:load />
 
-    <h1 class="mt-0 mb-6">{entry.data.title}</h1>
-    <Content components={MDXComponents} />
-  </div>
+		<h1 class="mt-0 mb-6">{entry.data.title}</h1>
+		<Content components={MDXComponents} />
+	</div>
 </DocsLayout>

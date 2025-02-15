@@ -28,11 +28,12 @@
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.7.0",
 		"postcss": "^8.4.49",
+		"prettier": "^3.5.1",
+		"prettier-plugin-astro": "^0.14.1",
+		"prettier-plugin-svelte": "^3.2.6",
+		"prettier-plugin-tailwindcss": "^0.6.5",
 		"svelte": "^5.7.0",
 		"svelte-preprocess": "^6.0.3",
-		"tailwindcss": "^3.4.16",
-		"prettier": "^3.3.2",
-		"prettier-plugin-svelte": "^3.2.6",
-		"prettier-plugin-tailwindcss": "^0.6.5"
+		"tailwindcss": "^3.4.16"
 	}
 }

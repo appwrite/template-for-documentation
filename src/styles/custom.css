@@ -76,14 +76,16 @@
 
 /* Code Blocks */
 .prose {
-	pre[class*='language-'] {
-		@apply mb-6 overflow-x-auto rounded-lg border border-gray-100 p-4 dark:border-transparent;
-		background-color: var(--prism-background) !important;
+	pre,
+	pre[class^='language-'],
+	pre[data-language] {
 		color: var(--prism-color);
+		background-color: var(--prism-background) !important;
+		@apply my-0 overflow-x-auto rounded-none border-t border-[#EDEDF0] p-2 dark:border-neutral-800;
 	}
 
 	:not(pre) > code {
-		@apply rounded border border-gray-100 bg-white px-1.5 py-0.5 dark:border-transparent dark:bg-neutral-800;
+		@apply bg-white p-0.5 dark:bg-neutral-800;
 	}
 
 	code {
@@ -93,6 +95,27 @@
 	code[class*='language-'] {
 		@apply bg-transparent p-0;
 		color: var(--prism-color);
+	}
+
+	.code-block pre {
+		display: flex;
+		flex-direction: column;
+		counter-reset: line-number;
+	}
+
+	.code-block .line-number {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		counter-increment: line-number;
+	}
+
+	.code-block .line-number::before {
+		content: counter(line-number);
+		width: 30px;
+		text-align: right;
+		padding-right: 10px;
+		color: gray;
 	}
 }
 
