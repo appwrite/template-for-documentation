@@ -14,10 +14,15 @@
 	};
 
 	const Icon = icons[icon];
+
+	const safeId = title
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/(^-|-$)/g, '');
 </script>
 
 <div class="card bg-gradient-to-br">
-	<h3 class="title">
+	<h3 class="title" id={safeId}>
 		<span class="icon">
 			<svelte:component this={Icon} size={24} strokeWidth={2} />
 		</span>

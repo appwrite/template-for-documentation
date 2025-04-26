@@ -8,12 +8,13 @@
 		level: number;
 	}
 
+	let lockActiveId = false;
 	let tocItems: TOCItem[] = [];
 	let activeId: string | null = null;
 
 	onMount(() => {
 		// Get all headings from the main content
-		const headings = document.querySelectorAll('main h2, main h3');
+		const headings = document.querySelectorAll<HTMLHeadingElement>('main h2, main h3');
 		const items: TOCItem[] = [];
 
 		headings.forEach((heading) => {
@@ -32,11 +33,15 @@
 		// Set up intersection observer for active heading
 		const observer = new IntersectionObserver(
 			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						activeId = entry.target.id;
-					}
-				});
+				if (lockActiveId) return;
+
+				const visible = entries
+					.filter((entry) => entry.isIntersecting)
+					.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+				if (visible.length > 0) {
+					activeId = visible[0].target.id;
+				}
 			},
 			{
 				rootMargin: '-100px 0px -66%'
@@ -45,12 +50,15 @@
 
 		headings.forEach((heading) => observer.observe(heading));
 
-		return () => {
-			observer.disconnect();
-		};
+		return () => observer.disconnect();
 	});
 
-	function handleClick() {
+	function handleClick(id: string) {
+		activeId = id;
+		lockActiveId = true;
+
+		setTimeout(() => (lockActiveId = false), 300);
+
 		const sidebar = document.getElementById('right-sidebar');
 		if (window.innerWidth < 1024 && sidebar) {
 			sidebar.classList.add('translate-x-full');
@@ -65,10 +73,10 @@
 		{#each tocItems as item}
 			<li style="padding-left: {(item.level - 2) * 16}px">
 				<a
-					href="#{item.id}"
+					href={`#${item.id}`}
 					class="block py-1 text-sm text-[#56565C] no-underline transition-colors hover:text-[#19191C] dark:text-gray-400 dark:hover:text-white"
 					class:active={activeId === item.id}
-					on:click={handleClick}
+					on:click={() => handleClick(item.id)}
 				>
 					{item.text}
 				</a>
