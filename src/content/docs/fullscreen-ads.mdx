@@ -1,0 +1,47 @@
+---
+title: Full-Screen Ads
+description: Managing Interstitial, Rewarded, and App Open ads.
+group: Ad Formats
+priority: 1
+---
+
+# Full-Screen Ads
+
+Full-screen ads (Interstitial, Rewarded, App Open) are managed via the `AdsViewModel`.
+
+## AdsViewModel
+
+The primary entry point for loading ads and managing ad state. It provides reactive flows for UI updates.
+
+### State Flows
+
+- `isInterstitialAdLoading`: True when an interstitial is loading.
+- `isAppOpenAdLoading`: Specific state for App Open ads.
+- `isInCooldown`: True if an interstitial cooldown is active.
+- `coolDownRemainingSeconds`: Countdown seconds remaining.
+
+### Usage Example
+
+Use `AdsViewModel` directly in your Activity or Fragment.
+
+```kotlin
+val adsViewModel: AdsViewModel by viewModel()
+
+adsViewModel.load(
+    adKey = "interstital_game_over",
+    adType = AdType.INTERSTITIAL,
+    shouldCache = true,
+    callbacks = object : AdCallback {
+        override fun onAdLoaded(ad: Any, type: AdType) { /* Ready */ }
+        override fun onAdDismissed() { /* Resume Game */ }
+        override fun onAdFailed(e: Throwable) { /* Handle error */ }
+        override fun onNoInternet() { /* Handle offline */ }
+        override fun onAdShown() { /* Analytics */ }
+        override fun onAdClicked() { /* Analytics */ }
+    }
+)
+```
+
+## App Open Ads
+
+App Open ads are handled automatically if your `Application` class inherits from `AdsApplicationUtil`. They will be shown when the app moves to the foreground, provided the current Activity is not in the `mediationActivityList`.

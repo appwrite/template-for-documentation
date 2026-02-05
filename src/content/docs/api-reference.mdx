@@ -1,0 +1,61 @@
+---
+title: API Reference
+description: Data models, Enums, and advanced configurations.
+group: API Reference
+priority: 1
+---
+
+# AdType Enums
+
+| Enum Value | Description |
+| :--- | :--- |
+| `NATIVE_AD` | Native ad format |
+| `NATIVE_FULLSCREEN` | Full screen native ad |
+| `INTERSTITIAL` | Full screen interstitial ad |
+| `REWARDED` | Rewarded video ad |
+| `REWARDED_INTERSTITIAL` | Rewarded interstitial ad |
+| `APP_OPEN` | App open ad |
+| `BANNER_STANDARD` | Standard banner (320x50) |
+| `BANNER_MEDIUM_RECTANGULAR` | Medium rectangle banner (300x250) |
+| `BANNER_LARGE` | Large banner (320x100) |
+| `ADAPTIVE_BANNER` | Adaptive banner size |
+
+# Advanced Usage
+
+### Custom Data Source
+
+Override `DataSourceRepository` to provide your own ad configuration instead of Appwrite.
+
+```kotlin
+class MyCustomDataSource : DataSourceRepository {
+    override suspend fun fetchConfig(): Result<Pair<List<AdItem>, GlobalConfiguration>> {
+        val adItems = listOf(
+             AdItem(
+                 id = "1", 
+                 name = "home_banner", 
+                 is_enable = true, 
+                 type = "BANNER_STANDARD", 
+                 key = listOf("ca-app-pub-3940256099942544/6300978111")
+             )
+        )
+        // ... return result
+    }
+}
+```
+
+### Manual Banner Recycling
+
+If not using `AdContainerView`, use `BannerViewHolderViewModel` manually.
+
+```kotlin
+val bannerViewModel: BannerViewHolderViewModel by viewModel()
+
+/* Storing */
+bannerViewModel.storeBannerAd("my_banner_key", adView)
+
+/* Retrieving */
+val cachedAdView = bannerViewModel.getBannerAd("my_banner_key")
+
+/* Cleanup */
+bannerViewModel.removeBannerAd("my_banner_key")
+```

@@ -1,0 +1,74 @@
+---
+title: Installation & Setup
+description: Learn how to install and initialize AdLibrary in your Android project.
+group: Setup
+priority: 1
+---
+
+# Installation
+
+Ensure your project is set up to use Koin for dependency injection. Include the `adLibrary` module in your project's dependencies.
+
+```kotlin
+// build.gradle.kts
+dependencies {
+    implementation(project(":adLibrary"))
+}
+```
+
+# Setup
+
+### 1. Application Class Setup
+
+To automatically handle **App Open Ads** and prevent ad overlaps, inherit your Application class from `AdsApplicationUtil`.
+
+#### Constructor Parameters
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `appOpenKey` | `String` | The ad unit ID key for App Open ads. |
+| `appOpenShowingView` | `(LayoutInflater) -> View?` | Optional: Custom layout to show *while* the App Open ad is being displayed. |
+| `appOpenLoadingView` | `(LayoutInflater) -> View?` | Optional: Custom layout to show while the ad is *loading* (Splash-like). |
+| `interstitialLoadingView` | `(LayoutInflater) -> View?` | Optional: Custom loading layout for Interstitial ads. |
+
+### Example Implementation
+
+```kotlin
+import com.appsequeeze.adlibrary.prod.utils.AdsApplicationUtil
+import com.appsequeeze.adlibrary.prod.di.modules.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+
+class MyApplication : AdsApplicationUtil(appOpenKey = "example_app_open") {
+    override fun onCreate() {
+        super.onCreate()
+        
+        // OPTIONAL: Enable debug logging
+        setDebug(true)
+        
+        // OPTIONAL: Prevent Ads on specific screens
+        setMediationActivityList(
+            arrayListOf(
+                SplashActivity::class,
+                PaywallActivity::class
+            )
+        )
+
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(adsModule)
+        }
+    }
+}
+```
+
+Don't forget to register your Application class in `AndroidManifest.xml`:
+
+```xml
+<application
+    android:name=".MyApplication"
+    ... >
+```
+
+> [!IMPORTANT]
+> The `mediationActivityList` is critical for ensuring App Open ads don't interrupt sensitive flows like Splash screens or payment gateways. `AdActivity` from AdMob is excluded by default.

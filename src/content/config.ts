@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
 // Define groups in desired order
-export const groups = ['Overview', 'Foundations', 'Components'] as const;
+export const groups = ['Introduction', 'Setup', 'Ad Formats', 'Usage', 'API Reference'] as const;
 
 const docs = defineCollection({
 	type: 'content',

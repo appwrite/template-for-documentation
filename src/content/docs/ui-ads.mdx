@@ -1,0 +1,80 @@
+---
+title: UI Ads (Banner & Native)
+description: Using AdContainerView for Banner and Native ads in XML and Compose.
+group: Usage
+priority: 1
+---
+
+# XML Layouts
+
+Use `AdContainerView` in your XML layouts for both Banner and Native ads.
+
+```xml
+<com.appsequeeze.adlibrary.prod.utils.viewsUtil.AdContainerView
+    android:id="@+id/adContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+```
+
+### Loading an Ad
+
+```kotlin
+val adContainer: AdContainerView = findViewById(R.id.adContainer)
+
+// OPTIONAL: Set callback
+adContainer.setAdCallback(object : AdCallback {
+    override fun onAdLoaded(ad: Any, type: AdType) { /* ... */ }
+    // ...
+})
+
+// LOAD THE AD
+adContainer.setup(
+    adKey = "native_home",
+    adType = AdType.NATIVE_AD,
+    size = NativeAdSizeEnum.SMALL,
+    shouldCache = true,
+    shouldRetain = true,
+    shouldStore = true
+)
+```
+
+# Jetpack Compose
+
+For Jetpack Compose, use the `AdContainerView` composable wrapper. This automatically handles the lifecycle and recycling of ad views.
+
+```kotlin
+@Composable
+fun HomeScreen() {
+    Column {
+        Text("My App Content")
+        
+        // Show a Banner Ad
+        AdContainerView(
+            adKey = "home_banner",
+            adType = AdType.BANNER_STANDARD,
+            modifier = Modifier.fillMaxWidth()
+        )
+        
+        // Show a Native Ad
+        AdContainerView(
+            adKey = "native_feed",
+            adType = AdType.NATIVE_AD,
+            size = NativeAdSizeEnum.SMALL,
+            modifier = Modifier.fillMaxWidth().height(150.dp)
+        )
+    }
+}
+```
+
+# Storage & Caching Parameters
+
+Control how ads are stored and reused in `AdContainerView`:
+
+| Parameter | Default | Description |
+| :--- | :--- | :--- |
+| `shouldCache` | `true` | If enabled, Native ads are cached after being fetched, making subsequent loads near-instant. |
+| `shouldRetain` | `true` | Specifies if Native ads should be retained in memory after they are displayed. |
+| `shouldStore` | `true` | **Banner Specific:** If true, the banner is stored in `BannerViewHolderViewModel` for recycling across screens. |
+
+> [!TIP]
+> Setting `shouldStore = true` for banners prevents flickering during navigation by reusing the same view instance.
