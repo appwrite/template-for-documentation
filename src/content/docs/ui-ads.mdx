@@ -21,10 +21,25 @@ Use `AdContainerView` in your XML layouts for both Banner and Native ads.
 ```kotlin
 val adContainer: AdContainerView = findViewById(R.id.adContainer)
 
-// OPTIONAL: Set callback
+// OPTIONAL: Set a custom theme color scheme
+adContainer.setColorScheme(
+    ColorScheme(
+        primary = Color.BLUE,
+        onPrimary = Color.WHITE,
+        onSurface = Color.BLACK,
+        onSurfaceVariant = Color.GRAY,
+        surfaceContainerHigh = Color.parseColor("#F5F5F5")
+    )
+)
+
+// OPTIONAL: Listen to callbacks
 adContainer.setAdCallback(object : AdCallback {
-    override fun onAdLoaded(ad: Any, type: AdType) { /* ... */ }
-    // ...
+    override fun onAdLoaded(ad: Any, type: AdType) { Log.d("Ad", "Loaded") }
+    override fun onAdFailed(e: Throwable) { Log.e("Ad", "Failed: ${e.message}") }
+    override fun onNoInternet() { /* Handle offline */ }
+    override fun onAdShown() { /* Analytics */ }
+    override fun onAdClicked() { /* Analytics */ }
+    override fun onAdDismissed() { /* Handle dismiss */ }
 })
 
 // LOAD THE AD
@@ -41,6 +56,175 @@ adContainer.setup(
 # Jetpack Compose
 
 For Jetpack Compose, use the `AdContainerView` composable wrapper. This automatically handles the lifecycle and recycling of ad views.
+
+### Implementation
+
+If you are using Compose, you can use this wrapper implementation which handles lifecycle and recycling:
+
+```kotlin
+import android.util.Log
+import android.widget.FrameLayout
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
+import com.appsequeeze.adlibrary.prod.admanager.AdCallback
+import com.appsequeeze.adlibrary.prod.domain.model.AdType
+import com.appsequeeze.adlibrary.prod.presentation.enums.NativeAdSizeEnum
+import com.appsequeeze.adlibrary.prod.presentation.utils.AdContainerBuilder
+import com.appsequeeze.adlibrary.prod.presentation.utils.hideLoadingAd
+import com.appsequeeze.adlibrary.prod.presentation.viewmodel.AdsViewModel
+import com.appsequeeze.adlibrary.prod.presentation.viewmodel.BannerViewHolderViewModel
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.appopen.AppOpenAd
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
+import org.koin.compose.koinInject
+
+@Composable
+fun AdContainerView(
+    modifier: Modifier = Modifier,
+    adsViewModel: AdsViewModel = koinInject(),
+    bannerViewModel: BannerViewHolderViewModel = koinInject(),
+    adKey: String,
+    adType: AdType,
+    size: NativeAdSizeEnum = NativeAdSizeEnum.SMALL,
+    shouldCache: Boolean = true,
+    shouldRetain: Boolean = true,
+    shouldStore: Boolean = true
+) {
+    fun setupDismissCallbacks(ad: Any, callback: AdCallback) {
+        val fullScreenCallback = object : FullScreenContentCallback() {
+            override fun onAdShowedFullScreenContent() { callback.onAdShown() }
+            override fun onAdDismissedFullScreenContent() { callback.onAdDismissed() }
+            override fun onAdClicked() { callback.onAdClicked() }
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                callback.onAdFailed(Exception(adError.message))
+            }
+        }
+
+        when (ad) {
+            is InterstitialAd -> ad.fullScreenContentCallback = fullScreenCallback
+            is RewardedAd -> ad.fullScreenContentCallback = fullScreenCallback
+            is RewardedInterstitialAd -> ad.fullScreenContentCallback = fullScreenCallback
+            is AppOpenAd -> ad.fullScreenContentCallback = fullScreenCallback
+        }
+    }
+
+    fun loadAd(
+        adName: String,
+        adType: AdType,
+        shouldRetain: Boolean = false,
+        shouldCache: Boolean = false,
+        builder: AdContainerBuilder? = null,
+        onDismiss: () -> Unit = {},
+        showAction: (String, Any) -> Unit = { _, _ -> },
+    ) {
+        when (adType) {
+            AdType.NATIVE_AD -> builder?.nativeSize(size)
+            AdType.ADAPTIVE_BANNER -> {
+                builder?.bannerAdaptive()
+                builder?.setRadius(0)
+            }
+            AdType.BANNER_LARGE -> builder?.bannerLarge()
+            AdType.BANNER_STANDARD -> builder?.bannerSmall()
+            AdType.BANNER_MEDIUM_RECTANGULAR -> builder?.bannerMediumRectangle()
+            else -> {}
+        }
+
+        builder?.showLoading()
+        adsViewModel.load(adName, adType, shouldCache, object : AdCallback {
+            override fun onAdLoaded(ad: Any, type: AdType) {
+                Log.d("ComposeAd", "✔ LOADED → $adName | $type")
+                builder ?: hideLoadingAd()
+                setupDismissCallbacks(ad, this)
+
+                if (ad is AdView && shouldStore) {
+                    bannerViewModel.storeBannerAd(adName, ad)
+                }
+                showAction(adName, ad)
+            }
+
+            override fun onAdFailed(e: Throwable) {
+                builder?.showError(e.localizedMessage ?: "Error")
+                builder ?: hideLoadingAd()
+            }
+
+            override fun onNoInternet() {
+                builder?.showError("No internet")
+                builder ?: hideLoadingAd()
+            }
+
+            override fun onAdShown() { builder ?: hideLoadingAd() }
+            override fun onAdClicked() { builder ?: hideLoadingAd() }
+            override fun onAdDismissed() { onDismiss() }
+        }, shouldRetain)
+    }
+
+    val context = LocalContext.current
+    val isDark = isSystemInDarkTheme()
+
+    val isBannerType = adType in listOf(
+        AdType.ADAPTIVE_BANNER,
+        AdType.BANNER_LARGE,
+        AdType.BANNER_STANDARD,
+        AdType.BANNER_MEDIUM_RECTANGULAR
+    )
+
+    val existingBannerAd = if (isBannerType) bannerViewModel.getBannerAd(adKey) else null
+
+    key(adKey, isDark) {
+        AndroidView(
+            modifier = modifier,
+            factory = { ctx ->
+                FrameLayout(ctx).apply {
+                    layoutParams = FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT
+                    )
+                }
+            },
+            update = { container ->
+                val adContainerBuilder = AdContainerBuilder(context).into(container)
+                if (adType == AdType.ADAPTIVE_BANNER) {
+                    adContainerBuilder.bannerAdaptive()
+                    adContainerBuilder.setRadius(0)
+                }
+                
+                when {
+                    existingBannerAd != null -> {
+                        (existingBannerAd.parent as? android.view.ViewGroup)?.removeView(existingBannerAd)
+                        adContainerBuilder.showBanner(existingBannerAd)
+                    }
+
+                    else -> {
+                        loadAd(
+                            adKey,
+                            adType,
+                            shouldCache = if (isBannerType && shouldCache) false else shouldCache,
+                            shouldRetain = if (isBannerType && shouldRetain) false else shouldRetain,
+                            builder = adContainerBuilder
+                        ) { adName, ad ->
+                            when (ad) {
+                                is NativeAd -> adContainerBuilder.showNative(adName, ad)
+                                is AdView -> adContainerBuilder.showBanner(ad)
+                                else -> {}
+                            }
+                        }
+                    }
+                }
+            }
+        )
+    }
+}
+```
+
+### Usage Example
 
 ```kotlin
 @Composable

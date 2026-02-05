@@ -57,8 +57,8 @@
 		<a href="/" class="flex items-center gap-2">
 			<img src="/logo.svg" alt="Logo" class="h-8 w-8" />
 			<div class="flex items-center gap-2">
-				<span class="font-medium text-[#19191C] dark:text-white">Acme Inc.</span>
-				<span class="hidden text-gray-400 sm:inline">Documentation</span>
+				<span class="font-medium text-[#19191C] dark:text-white">Appsqueeze Ad Library Module</span>
+				<span class="hidden text-gray-400 sm:inline py-8">Documentation</span>
 			</div>
 		</a>
 
