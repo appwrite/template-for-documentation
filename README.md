@@ -17,6 +17,8 @@ A sleek and modern documentation site template built with Astro, Svelte, and Tai
 
 ## Quick Start
 
+Requires Node.js 22.23.4 or newer.
+
 ```bash
 # Clone the repository
 git clone https://github.com/appwrite/template-for-documentation.git
@@ -78,7 +80,7 @@ The sidebar navigation is automatically generated from your content structure. T
 const groups = ['Overview', 'Foundations', 'Components'] as const;
 
 const docs = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/*.mdx', base: './src/content/docs' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
