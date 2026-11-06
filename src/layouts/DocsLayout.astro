@@ -5,7 +5,7 @@ import TableOfContents from '@components/TableOfContents.svelte';
 import SidebarOverlay from '@components/SidebarOverlay.svelte';
 import Footer from '@components/Footer.svelte';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { groups } from '../content/config';
+import { groups } from '../content.config';
 import '../styles/custom.css';
 
 interface Props {
@@ -54,8 +54,8 @@ const navigation = [
 	...(docGroups['Overview'] || [])
 		.sort((a, b) => {
 			// Always put the index page (Home) first
-			if (a.slug === 'index') return -1;
-			if (b.slug === 'index') return 1;
+			if (a.id === 'index') return -1;
+			if (b.id === 'index') return 1;
 
 			// Then sort remaining pages by priority
 			if (a.data.priority !== undefined && b.data.priority !== undefined) {
@@ -69,9 +69,9 @@ const navigation = [
 		})
 		.map((doc: CollectionEntry<'docs'>) => ({
 			// Show index page as "Home", otherwise use the page title
-			label: doc.slug === 'index' ? 'Home' : doc.data.title,
+			label: doc.id === 'index' ? 'Home' : doc.data.title,
 			// Root path for index, otherwise use the slug
-			link: `/${doc.slug === 'index' ? '' : doc.slug}`
+			link: `/${doc.id === 'index' ? '' : doc.id}`
 		})),
 
 	// Other groups (Foundations, Components) in the order defined in config.ts
@@ -82,7 +82,7 @@ const navigation = [
 				label: group.toUpperCase(),
 				items: docGroups[group].map((doc: CollectionEntry<'docs'>) => ({
 					label: doc.data.title,
-					link: `/${doc.slug}`
+					link: `/${doc.id}`
 				}))
 			};
 		})
@@ -95,7 +95,7 @@ const navigation = [
 			label: group.toUpperCase(),
 			items: items.map((doc: CollectionEntry<'docs'>) => ({
 				label: doc.data.title,
-				link: `/${doc.slug}`
+				link: `/${doc.id}`
 			}))
 		}))
 ];

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 export const GET: APIRoute = async () => {
 	const docs = await getCollection('docs');
@@ -7,14 +7,14 @@ export const GET: APIRoute = async () => {
 	const searchIndex = await Promise.all(
 		docs.map(async (entry: CollectionEntry<'docs'>) => {
 			// Get rendered content
-			const { remarkPluginFrontmatter } = await entry.render();
+			const { remarkPluginFrontmatter } = await render(entry);
 
 			return {
 				title: entry.data.title,
 				description: entry.data.description,
 				group: entry.data.group,
 				category: entry.data.category,
-				slug: `/${entry.slug}`,
+				slug: `/${entry.id}`,
 				// Add headings from remarkPluginFrontmatter for better search
 				headings: remarkPluginFrontmatter.headings?.map((h: any) => h.text) || []
 			};

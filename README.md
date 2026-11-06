@@ -17,6 +17,8 @@ A sleek and modern documentation site template built with Astro, Svelte, and Tai
 
 ## Quick Start
 
+Requires Node.js 22.23.4 or newer.
+
 ```bash
 # Clone the repository
 git clone https://github.com/appwrite/template-for-documentation.git
@@ -71,14 +73,14 @@ Welcome to our documentation...
 
 ### Navigation Structure
 
-The sidebar navigation is automatically generated from your content structure. The order of navigation groups is defined in `src/content/config.ts`:
+The sidebar navigation is automatically generated from your content structure. The order of navigation groups is defined in `src/content.config.ts`:
 
 ```typescript
 // Define groups in desired order
 const groups = ['Overview', 'Foundations', 'Components'] as const;
 
 const docs = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/*.mdx', base: './src/content/docs' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -132,7 +134,7 @@ If `priority` is not set, items are sorted alphabetically by title.
 
 Groups appear in the order they're defined in `config.ts`. To change the order of navigation groups:
 
-1. Update the `groups` array in `src/content/config.ts`
+1. Update the `groups` array in `src/content.config.ts`
 2. The sidebar will automatically reflect the new order
 3. TypeScript ensures group names in MDX files match the config
 
