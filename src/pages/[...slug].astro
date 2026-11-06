@@ -10,8 +10,8 @@ const docs = await getCollection('docs');
 
 // Find the matching entry
 const entry = docs.find((doc) => {
-	if (!slug) return doc.slug === 'index';
-	return doc.slug === slug;
+	if (!slug) return doc.id === 'index';
+	return doc.id === slug;
 });
 
 // If no matching entry is found, return 404

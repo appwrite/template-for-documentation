@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
 import { rehypeCopyButton } from './src/plugins/code-blocks.js';
@@ -17,13 +16,7 @@ export default defineConfig({
 		},
 		rehypePlugins: [rehypeCopyButton]
 	},
-	integrations: [
-		svelte(),
-		tailwind({
-			applyBaseStyles: false
-		}),
-		mdx()
-	],
+	integrations: [svelte(), mdx()],
 	vite: {
 		resolve: {
 			alias: {

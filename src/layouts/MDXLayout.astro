@@ -1,6 +1,6 @@
 ---
 import DocsLayout from './DocsLayout.astro';
-import type { CollectionEntry } from 'astro:content';
+import { render, type CollectionEntry } from 'astro:content';
 import * as MDXComponents from '@components/mdx';
 import MobileBreadcrumb from '@components/MobileBreadcrumb.svelte';
 import DesktopBreadcrumb from '@components/DesktopBreadcrumb.svelte';
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <DocsLayout title={entry.data.title} description={entry.data.description}>
